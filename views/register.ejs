@@ -1,0 +1,35 @@
+<div id="register" class="container">
+	<link rel="stylesheet" type="text/css" href="/css/register.css">
+	<form id="regform" class="col-xs-12 col-sm-8 col-md-8 col-lg-8 col-sm-push-2 col-md-push-3 col-lg-push-4" action="/register" method="post">
+		<div id="psdiv" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<input id="username" class="col-xs-5 col-sm-5 col-md-4 col-lg-4" type="text" placeholder="Pseudo" name="username" >
+			<div id="ulen" class="erreur alert alert-error alert-block alert-danger col-xs-10 col-sm-8 col-md-9 col-lg-9">
+					<p><span class="glyphicon glyphicon-exclamation-sign"></span> Votre pseudo doit contenir au moins 4 caractères.</p>
+			</div>
+			<div id="veruser" class="erreur alert alert-error alert-block alert-danger col-xs-8 col-sm-8 col-lg-8">
+				<p><span class="glyphicon glyphicon-exclamation-sign"></span> Ce pseudo est déjà utilisé.</p>
+			</div>
+		</div>
+		<div id="phonediv">
+			<input id="phone" class="col-xs-5 col-sm-5 col-md-4 col-lg-4" type="phone" placeholder="numéro de téléphone" name="phone">
+			<div id="phonever" class="erreur alert alert-error alert-block alert-danger col-xs-8 col-sm-8 col-md-9 col-lg-9">
+				<p><span class="glyphicon glyphicon-exclamation-sign"></span>Veuillez entrer un numéro valide.</p>
+			</div>
+		</div>
+		<div id="passdiv" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<input id="password" type="password" class="col-xs-5 col-sm-5 col-md-4 col-lg-4" placeholder="Mot de passe" name="password">
+		</div>
+		<div id="passdiv2" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<input id="password2" type="password" class="col-xs-5 col-sm-5 col-md-4 col-lg-4" placeholder="vérification du mot de passe">
+			<div id="mdplen" class="erreur alert alert-error alert-block alert-danger col-xs-8 col-sm-8 col-md-8 col-lg-8">
+				<p><span class="glyphicon glyphicon-exclamation-sign"></span> Votre mot de passe doit contenir au moins 8 caractères.</p>
+			</div>
+			<div id="diffp" class="erreur alert alert-error alert-block alert-danger col-xs-8 col-sm-8 col-md-8 col-lg-8">
+				<p><span class="glyphicon glyphicon-exclamation-sign"></span> Les deux mots de passe entrés sont différents.</p>
+			</div>
+		</div>
+		<div class="row"></div>
+		<button class="btn btn-success center" id="regbut" type="button">Valider</button>
+	</form>
+	<script src="/js/register.js"></script>
+</div>

@@ -1,0 +1,37 @@
+<div id="login" class="container">
+	<form id="logform" class="col-xs-12 col-sm-8 col-md-8 col-lg-8 col-sm-push-2 col-md-push-3 col-lg-push-4" action="/login" method="post">
+		<% if (error == true) {%>
+			<div id="error" class="alert alert-error alert-block alert-danger col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<p><span class="glyphicon glyphicon-exclamation-sign"></span> Le mot de passe entré n'est pas correct.</p>
+			</div>
+		<% } %>
+		<div id="user" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<input id="eusr" name="username" type="text" class="col-xs-6 col-sm-6 col-md-5 col-lg-5" placeholder="Pseudo...">
+			<div class="row">
+			</div>
+			<div id="nexist" class="erreur alert alert-error alert-block alert-danger col-xs-6 col-sm-6 col-md-5 col-lg-5">
+				<p><span class="glyphicon glyphicon-exclamation-sign"></span> Votre compte n'existe pas.</p>
+			</div>
+			<!-- c'est sale de coder comme ça ! (puke) -->
+			<div id="ushrt" class="erreur alert alert-error alert-block alert-danger col-xs-6 col-sm-6 col-md-5 col-lg-5">
+				<p><span class="glyphicon glyphicon-exclamation-sign"></span> Veuillez entrer au moins 4 caractères.</p>
+			</div>
+			<!-- je cherche un travail si jamais ^^ -->
+			<div id="nactive" class="erreur alert alert-error alert-block alert-danger col-xs-6 col-sm-6 col-md-5 col-lg-5">
+				<p><span class="glyphicon glyphicon-exclamation-sign"></span> Votre compte n'est pas activé.</p>
+			</div>
+		</div>
+		<div id="pwd">
+			<input id="epwd" name="password" type="password" class="col-xs-6 col-sm-6 col-md-5 col-lg-5" placeholder="Mot de passe...">
+			<div class="row">
+			</div>
+			<div id="pshrt" class="erreur alert alert-error alert-block alert-danger col-xs-6 col-sm-6 col-md-5 col-lg-5">
+				<p><span class="glyphicon glyphicon-exclamation-sign"></span> Veuillez entrer au moins 8 caractères.</p>
+			</div>
+		</div>
+		<div class="row">
+		</div>
+		<button id="logbut" class="btn btn-success btn-md col-xs-4 col-sm-4 col-md-2 col-xs-offset-2 col-sm-offset-2 col-md-offset-3" type="button">Connexion</button>
+	</form>
+	<script src="/js/login.js"></script>
+</div>

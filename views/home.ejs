@@ -1,0 +1,37 @@
+<div id="home" class="container">
+	<link rel="stylesheet" type="text/css" href="/css/home.css">
+	<div id="all"  class="row">
+	<% if (articles) { %>
+		<% if (articles.length > 0) { %>
+			<% for(var i = articles.length - 1; i >= 0; i--){ %>
+				<div class="col-xs-12 col-sm-10 col-md-8 col-lg-8 col-sm-offset-1 col-md-offset-2 col-lg-offset-2 article">
+					<% var article = '/articles/' + articles[i].Num; %>
+					<h3 class="text-center"><%= articles[i].Title %></h3>
+					<p class="wrote text-right">Rédigé par <%= articles[i].Author %></p>
+					<div class="row visible-sm"></div>
+					<% var img; %>
+					<% img = '/img/article/' + articles[i].Num + '/icone.png'; %>
+					<img class="icone col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xs-offset-1 col-sm-offset-1" src=<%= img %>>
+					<% var date; %>
+					<% if (articles[i].Wrote.getDate() < 10) { %>
+						<% date = '0' + articles[i].Wrote.getDate().toString() + '/'; %>
+					<% } else { %>
+						<% date = articles[i].Wrote.getDate().toString() + '/'; %>
+					<% } %>
+					<% if (articles[i].Wrote.getMonth() < 10) { %>
+						<% date = date + '0' + articles[i].Wrote.getMonth().toString() + '/'; %>
+					<% } else { %>
+						<% date = date + articles[i].Wrote.getDate().toString() + '/'; %>
+					<% } %>
+					<% date = date + articles[i].Wrote.getFullYear().toString(); %>
+					<div class="row"></div>
+					<p class="wrote text-right">Posté le <%= date %> </p>
+					<a class="btn btn-info link" href=<%= article %>> Lire l'article ! </a>
+				</div>
+			<% } %>
+		<% } else { %>
+			<h1>Il n'y a apparemment aucun article à afficher !</h1>
+		<% } %>
+	<% } %>
+	</div>
+</div>
