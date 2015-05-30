@@ -7,7 +7,7 @@ var util = require('util');
 var path = require('path');
 var multer = require('multer');
 
-module.exports = function(app)
+module.exports = function(app, dirname)
 {
 	app.get('/', function(req, res){
 		article.find({}, function(err, articles){
@@ -84,8 +84,7 @@ module.exports = function(app)
 	});
 	app.post('/post/article', function(req, res) {
 		console.log(req.body.article);
-
-	/*
+		console.log(dirname);
 		var nb;
 		article.count({}, function(err, whole) {
 			if (err)
@@ -103,13 +102,37 @@ module.exports = function(app)
 				Wrote: Date.now(),
 				Num: nb
 			});
-			newarticle.save(function (err) {
+			var template = dirname + '/views/' + nb + '.ejs';
+			console.log(template);
+			var start = "<div id=\"myart\" class=\"container\">";
+			start += "	<div id=\"corpse\" class=\"row\">";
+			start += "		<div class=\"col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1\">";
+			start += "			<h1 class=\"text-center\"><%= title %></h1>";
+			fs.writeFile(template, start, function(err) {
 				if (err)
 					console.log(err);
-				else
-					console.log('a new article was added, he\'s title is : ' + req.body.title);
+				console.log('the file was created !');
+				var bodyart = req.body.article;
+				fs.appendFile(template, bodyart, function(err) {
+					if (err)
+						console.log(err);
+					console.log('the template was appended');
+					var end = "			</div>";
+					end += "	</div>";
+					end += "</div>";
+					fs.appendFile(template, end, function(err) {
+						if (err)
+							console.log(err);
+						newarticle.save(function (err) {
+							if (err)
+								console.log(err);
+							else
+								console.log('a new article was added, he\'s title is : ' + req.body.title);
+						});
+					});
+				});
 			});
-		});*/
+		});
 		res.redirect('/');
 	});
 	app.get('/articles/:num', function(req, res){

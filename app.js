@@ -56,8 +56,6 @@ app.use(multer({
 				console.log(err);
 			console.log(whole);
 			nb = whole;
-			//if (typeof nb === "undefined")
-			//	nb = 0;
 			if (nb < 10)
 				var dir = '0' + nb;
 			else
@@ -133,7 +131,7 @@ passport.deserializeUser(admin.deserializeUser());
 //END
 
 //Loading the routes
-require('./routes/routes')(app);
+require('./routes/routes')(app, __dirname);
 
 io.sockets.on('connection', function(socket){
 	socket.on('new', function(title, Article){

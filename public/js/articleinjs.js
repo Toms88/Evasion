@@ -1,21 +1,24 @@
-var tdiv, upfo, mori, send, upds, view, num;
+var tdiv, upfo, mori, send, upds, view, num, tot, tmp;
 tdiv = document.getElementById("tdiv");
 upfo = document.getElementById("upform");
 mori = document.getElementById("moreup");
 send = document.getElementById("send");
 upds = document.getElementById("uploads");
 view = document.getElementById("view");
-num = 2;
+tot = document.getElementById("num");
 mori.onclick = function(){
+	tmp = parseInt(tot.value) + 1;
+	console.log(tmp);
+	tot.value = tmp.toString();
+	num = tmp;
 	var name = "img" + num;
-	var img = '<span class="col-xs-2 col-sm-2 col-md-1 col-lg-1">IMAGE : </span><input type="file" name=' + name + ' class="col-xs-10 col-sm-10 col-md-11 col-lg-11">';
-	upds.innerHTML += img;
-	num++;
-}
+	var span = '<span class="col-xs-2 col-sm-2 col-md-1 col-lg-1">IMAGE : </span><input type="file" name=' + name + ' class="col-xs-10 col-sm-10 col-md-11 col-lg-11">';
+	upds.innerHTML += span;
+};
 send.onclick = function(){
 	tinyMCE.triggerSave(true, true);
 	upfo.submit();
-}
+};
 
 function verif(form)
 {
