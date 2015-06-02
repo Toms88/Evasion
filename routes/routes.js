@@ -7,6 +7,40 @@ var util = require('util');
 var path = require('path');
 var multer = require('multer');
 
+function chng(article, fimg)
+{
+	var tot, i, rep, rept, sch, ps, p;
+
+	if (article)
+	{
+		JSON.stringify(fimg);
+		console.log(fimg.length);
+		tot = Object.keys(fimg).length - 1;
+		console.log("tot : " + tot);
+		i = 0;
+		while (i < tot)
+		{
+			rep = 'img' + (i + 1);
+			console.log(rep);
+			console.log(fimg);
+			console.log(fimg.img1);
+			console.log(fimg[rep]);
+			console.log("." + fimg[rep].extension);
+			rept = "%" + rep + "%";
+			path = "/img/article/<%= Num %>/" + rep + "." + fimg[rep].extension;
+			sch = "<img class=\"col-xs-12 col-sm-10 col-md-10 col-lg-10 col-sm-offset-1\" src=\"" + path + "\">"; 
+			article = article.replace(rept, sch);
+			i++;		
+		}
+		ps = "<p class=\"intro text-justify text\">";
+		p = /<p>/ig;
+		article = article.replace(p, ps);
+		console.log('final : ' + article);
+		return (article);
+	}
+
+}
+
 module.exports = function(app, dirname)
 {
 	app.get('/', function(req, res){
@@ -104,22 +138,24 @@ module.exports = function(app, dirname)
 			});
 			var template = dirname + '/views/' + nb + '.ejs';
 			console.log(template);
-			var start = "<div id=\"myart\" class=\"container\">";
-			start += "	<div id=\"corpse\" class=\"row\">";
-			start += "		<div class=\"col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1\">";
-			start += "			<h1 class=\"text-center\"><%= title %></h1>";
+			var start = "<link rel=\"stylesheet\" type=\"text/css\" href=\"/css/base.css\" media=\"screen\">"
+			start += "<div id=\"myart\" class=\"container\">\n";
+			start += "	<div id=\"corpse\" class=\"row\">\n";
+			start += "		<div class=\"col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1\">\n";
+			start += "			<h1 class=\"text-center\"><%= title %></h1>\n";
 			fs.writeFile(template, start, function(err) {
 				if (err)
 					console.log(err);
 				console.log('the file was created !');
 				var bodyart = req.body.article;
+				bodyart = chng(bodyart, req.files);	
 				fs.appendFile(template, bodyart, function(err) {
 					if (err)
 						console.log(err);
 					console.log('the template was appended');
-					var end = "			</div>";
-					end += "	</div>";
-					end += "</div>";
+					var end = "\n			</div>\n";
+					end += "	</div>\n";
+					end += "</div>\n";
 					fs.appendFile(template, end, function(err) {
 						if (err)
 							console.log(err);
@@ -127,13 +163,15 @@ module.exports = function(app, dirname)
 							if (err)
 								console.log(err);
 							else
+							{
 								console.log('a new article was added, he\'s title is : ' + req.body.title);
+								res.redirect('/');
+							}
 						});
 					});
 				});
 			});
 		});
-		res.redirect('/');
 	});
 	app.get('/articles/:num', function(req, res){
 		var num = req.params.num;
@@ -152,7 +190,7 @@ module.exports = function(app, dirname)
 				else
 					date = date + articles[0].Wrote.getDate().toString() + '/';
 				date = date + articles[0].Wrote.getFullYear().toString();
-				res.layout('layout', { title : articles[0].Title, user : req.user }, { content : { block : num, data : { title : articles[0].Title, date : date, author : articles[0].Author } } });
+				res.layout('layout', { title : articles[0].Title, user : req.user }, { content : { block : num, data : { title : articles[0].Title, date : date, author : articles[0].Author, Num : num } } });
 			}
 			else
 				res.redirect('/');

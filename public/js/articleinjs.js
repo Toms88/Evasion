@@ -6,6 +6,7 @@ send = document.getElementById("send");
 upds = document.getElementById("uploads");
 view = document.getElementById("view");
 tot = document.getElementById("num");
+num = 2;
 mori.onclick = function(){
 	tmp = parseInt(tot.value) + 1;
 	console.log(tmp);
