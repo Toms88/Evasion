@@ -27,8 +27,8 @@ var admin = require('./models/admin');
 var article = require('./models/article');
 
 //Connection to the database
-mongoose.connect('mongodb://Thomas:grosbrownie88@ds045017.mongolab.com:45017/evasions');
-//mongoose.connect('mongodb://78.213.4.159:27017/evasions');
+mongoose.connect('mongodb://127.0.0.1:27017/evasions');
+
 function format(fname){
 	var len = (fname.length) - 1;
 	var fmt = fname[len - 3] + fname[len - 2] + fname[len - 1] + fname[len];
